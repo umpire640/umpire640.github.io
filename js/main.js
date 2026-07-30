@@ -143,6 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate static values
     populateConfig();
 
+    // Update meta description and title
+    document.querySelector('meta[name="description"]').content = `Mechanical Engineering Portfolio - ${CFG.name}`;
+    document.title = `${CFG.name} | Mechanical Engineer | 3D Portfolio`;
+
     // Render dynamic content
     renderPortfolio();
     renderModels();
