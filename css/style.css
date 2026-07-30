@@ -346,70 +346,117 @@ model-viewer:not(:defined)::after {
    CAROUSEL
    ============================================ */
 
+/* ============================================
+   NORMAL GRID LAYOUTS (1-3 ITEMS)
+   ============================================ */
+
+.portfolio-grid,
+.model-showcase {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+
+/* 1 item - full width */
+.count-1 {
+    grid-template-columns: 1fr;
+}
+
+
+/* 2 items - two wide cards */
+.count-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* 3 items - three cards */
+.count-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+/* ============================================
+   CAROUSEL (4+ ITEMS ONLY)
+   ============================================ */
+
 .carousel {
     position: relative;
     width: 100%;
-    grid-column: 1 / -1;
-    padding: 0 55px;
 }
 
+
+/*
+   This is the viewport.
+   It hides cards that are outside the visible area.
+*/
 .carousel-track-wrapper {
     overflow: hidden;
     width: 100%;
 }
 
+
 .carousel-track {
     display: flex;
     gap: 1.5rem;
+
     transition: transform 0.45s ease;
     will-change: transform;
 }
 
-/* Cards inside carousel */
+
+/*
+   Three cards visible at once.
+   The gap calculation keeps spacing identical
+   to the normal grid.
+*/
 .carousel .portfolio-item,
 .carousel .model-card {
+
     flex: 0 0 calc((100% - 3rem) / 3);
     max-width: calc((100% - 3rem) / 3);
 
-    /* match normal grid cards */
-    padding: 1rem;
     box-sizing: border-box;
 }
 
 
 /* ============================================
-   ARROWS
+   CAROUSEL ARROWS
+   Outside the cards
    ============================================ */
 
 .carousel-btn {
+
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
 
-    border-radius: 50%;
     border: none;
+    border-radius: 50%;
 
-    background: rgba(37, 99, 235, 0.95);
+    background: rgba(37,99,235,.95);
     color: white;
 
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: bold;
-
-    cursor: pointer;
-    z-index: 20;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    cursor: pointer;
+
+    z-index: 20;
+
     box-shadow: 0 4px 12px rgba(0,0,0,.25);
 
     transition:
         transform .2s ease,
-        background .2s ease;
+        background .2s ease,
+        opacity .2s ease;
 }
 
 
@@ -419,20 +466,24 @@ model-viewer:not(:defined)::after {
 }
 
 
+.carousel-btn:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+
+/*
+   Outside the carousel.
+   Keep these identical so Portfolio
+   and Models align vertically.
+*/
 .carousel-btn.prev {
-    left: 5px;
+    left: -55px;
 }
 
 
 .carousel-btn.next {
-    right: 5px;
-}
-
-
-/* Disabled arrows */
-.carousel-btn:disabled {
-    opacity: .35;
-    cursor: default;
+    right: -55px;
 }
 
 
@@ -440,29 +491,29 @@ model-viewer:not(:defined)::after {
    MOBILE
    ============================================ */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-    .carousel {
-        padding: 0 40px;
+    .count-2,
+    .count-3 {
+        grid-template-columns: 1fr;
     }
+
 
     .carousel .portfolio-item,
     .carousel .model-card {
+
         flex: 0 0 100%;
         max-width: 100%;
     }
 
-    .carousel-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
-    }
 
     .carousel-btn.prev {
-        left: 0;
+        left: -15px;
     }
 
+
     .carousel-btn.next {
-        right: 0;
+        right: -15px;
     }
+
 }
