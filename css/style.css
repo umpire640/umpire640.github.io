@@ -328,3 +328,15 @@ footer {
     .model-viewer-container { height: 250px; }
     .contact-methods { flex-direction: column; }
 }
+
+/* Fallback for model-viewer loading */
+model-viewer:not(:defined) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-hover);
+    color: var(--text-muted);
+}
+model-viewer:not(:defined)::after {
+    content: "Loading 3D viewer...";
+}
