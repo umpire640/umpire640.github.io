@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mechanical Engineering Portfolio - [Your Name]">
-    <title>[Your Name] | Mechanical Engineer | 3D Portfolio</title>
-    
+    <meta name="description" content="Mechanical Engineering Portfolio - <span class="cfg-name">[Your Name]</span>">
+    <title><span class="cfg-name">[Your Name]</span> | Mechanical Engineer | 3D Portfolio</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
-    
+
+    <!-- Config (must load first) -->
+    <script src="js/config.js"></script>
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,7 +21,7 @@
     <!-- Header -->
     <header>
         <div class="navbar">
-            <div class="logo">[Your <span>Name</span>]</div>
+            <div class="logo"><span class="cfg-name">[Your <span>Name</span>]</span></div>
             <nav>
                 <ul>
                     <li><a href="#portfolio">Portfolio</a></li>
@@ -49,7 +52,7 @@
                 <h2 class="reveal">Portfolio</h2>
                 <p class="section-subtitle reveal delay-1">A curated selection of my mechanical engineering projects and designs.</p>
             </div>
-            
+
             <div class="portfolio-grid">
                 <!-- PROJECT 1 -->
                 <div class="portfolio-item reveal">
@@ -94,7 +97,7 @@
                     <small class="muted">Click and drag to rotate. Scroll to zoom.</small>
                 </p>
             </div>
-            
+
             <div class="model-showcase">
                 <!-- MODEL 1 - WORKING SAMPLE -->
                 <div class="model-card reveal">
@@ -103,13 +106,13 @@
                         Free sample model from Sketchfab. Replace with your own .glb file.
                     </p>
                     <div class="model-viewer-container">
-                        <model-viewer 
-                            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
-                            alt="Astronaut 3D Model" 
-                            ar 
-                            ar-modes="scene-viewer quick-look" 
-                            camera-controls 
-                            enable-pan 
+                        <model-viewer
+                            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                            alt="Astronaut 3D Model"
+                            ar
+                            ar-modes="scene-viewer quick-look"
+                            camera-controls
+                            enable-pan
                             poster="https://modelviewer.dev/shared-assets/models/Astronaut.webp">
                         </model-viewer>
                     </div>
@@ -125,12 +128,12 @@
                         Add your own 3D model by uploading a .glb file to assets/models/
                     </p>
                     <div class="model-viewer-container">
-                        <model-viewer 
-                            src="assets/models/telescope.glb" 
-                            alt="Your 3D Model" 
-                            ar 
-                            ar-modes="scene-viewer quick-look" 
-                            camera-controls 
+                        <model-viewer
+                            src="assets/models/telescope.glb"
+                            alt="Your 3D Model"
+                            ar
+                            ar-modes="scene-viewer quick-look"
+                            camera-controls
                             enable-pan>
                             <!-- Fallback content -->
                             <div class="model-fallback">
@@ -166,20 +169,20 @@
                 <h2 class="reveal">Curriculum Vitae</h2>
                 <p class="section-subtitle reveal delay-1">My professional background and experience.</p>
             </div>
-            
+
             <div class="cv-container">
                 <div class="cv-card reveal">
                     <div class="cv-header">
-                        <h2 class="cv-title">[Your Name]</h2>
+                        <h2 class="cv-title cfg-name">[Your Name]</h2>
                         <div class="cv-actions">
                             <a href="assets/cv/cv.pdf" class="btn btn-primary" download>📥 Download PDF</a>
                         </div>
                     </div>
-                    
+
                     <div class="cv-content">
                         <h3>Professional Summary</h3>
                         <p>
-                            Mechanical Engineer with experience in design, analysis, and manufacturing. 
+                            Mechanical Engineer with experience in design, analysis, and manufacturing.
                             Specialized in CAD design and prototyping.
                         </p>
 
@@ -197,9 +200,10 @@
 
                         <h3>Contact</h3>
                         <p>
-                            📧 <a href="mailto:your.email@example.com">your.email@example.com</a><br>
-                            🌐 <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> | 
-                            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                            📧 <a href="mailto:<span class="cfg-email-url"></span>" class="cfg-email">your.email@example.com</a><br>
+                            📞 <span class="cfg-phone">+45 XX XX XX XX</span><br>
+                            🌐 <a href="<span class="cfg-linkedin-url"></span>" target="_blank" class="cfg-linkedin">LinkedIn</a> |
+                            <a href="<span class="cfg-github-url"></span>" target="_blank" class="cfg-github">GitHub</a>
                         </p>
                     </div>
                 </div>
@@ -214,7 +218,7 @@
                 <h2 class="reveal">Get In Touch</h2>
                 <p class="section-subtitle reveal delay-1">Have questions or want to collaborate?</p>
             </div>
-            
+
             <div class="contact-container">
                 <div class="contact-card reveal">
                     <div class="contact-icon">📧</div>
@@ -222,19 +226,19 @@
                     <p class="contact-description">
                         Feel free to reach out about projects or collaborations.
                     </p>
-                    
+
                     <div class="contact-methods">
                         <div class="contact-method">
                             <div class="contact-method-icon">✉️</div>
-                            <a href="mailto:your.email@example.com">Email Me</a>
+                            <a href="mailto:<span class="cfg-email-url"></span>" class="cfg-email">Email Me</a>
                         </div>
                         <div class="contact-method">
                             <div class="contact-method-icon">💼</div>
-                            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                            <a href="<span class="cfg-linkedin-url"></span>" target="_blank" class="cfg-linkedin">LinkedIn</a>
                         </div>
                         <div class="contact-method">
                             <div class="contact-method-icon">🐙</div>
-                            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                            <a href="<span class="cfg-github-url"></span>" target="_blank" class="cfg-github">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -245,19 +249,18 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="copyright">© <span id="current-year"></span> [Your Name]. All rights reserved.</div>
+            <div class="copyright">© <span class="cfg-year"></span> <span class="cfg-name"></span>. All rights reserved.</div>
             <div class="social-links">
-                <a href="https://github.com/yourusername" class="social-link" target="_blank" title="GitHub">🐙</a>
-                <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank" title="LinkedIn">💼</a>
-                <a href="mailto:your.email@example.com" class="social-link" title="Email">✉️</a>
+                <a href="<span class="cfg-github-url"></span>" class="social-link" target="_blank" title="GitHub">🐙</a>
+                <a href="<span class="cfg-linkedin-url"></span>" class="social-link" target="_blank" title="LinkedIn">💼</a>
+                <a href="mailto:<span class="cfg-email-url"></span>" class="social-link" title="Email">✉️</a>
             </div>
         </div>
     </footer>
 
-    <!-- 3D Model Viewer Script - FIXED VERSION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@2.1.1/dist/model-viewer.min.js"></script> -->
+    <!-- 3D Model Viewer Script -->
     <script type="module" src="https://unpkg.com/@google/model-viewer@3.0.1/dist/model-viewer.min.js"></script>
-    
+
     <!-- Main JavaScript -->
     <script type="module" src="js/main.js"></script>
 </body>
