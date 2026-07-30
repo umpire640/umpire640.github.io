@@ -1,5 +1,32 @@
+// Populate all config values
+function populateConfig() {
+    const cfg = window.CFG;
+
+    // Text content
+    document.querySelectorAll('.cfg-name').forEach(el => el.textContent = cfg.name);
+    document.querySelectorAll('.cfg-email').forEach(el => el.textContent = cfg.email);
+    document.querySelectorAll('.cfg-phone').forEach(el => el.textContent = cfg.phone);
+    document.querySelectorAll('.cfg-github').forEach(el => el.textContent = cfg.github);
+    document.querySelectorAll('.cfg-linkedin').forEach(el => el.textContent = cfg.linkedin);
+    document.querySelectorAll('.cfg-year').forEach(el => el.textContent = cfg.year);
+
+    // URL attributes
+    document.querySelectorAll('.cfg-email-url').forEach(el => el.textContent = cfg.email);
+    document.querySelectorAll('[href*="yourusername"]').forEach(el => {
+        el.href = el.href.replace('yourusername', cfg.github);
+    });
+    document.querySelectorAll('[href*="yourprofile"]').forEach(el => {
+        el.href = el.href.replace('yourprofile', cfg.linkedin);
+    });
+    document.querySelectorAll('[href*="your.email@example.com"]').forEach(el => {
+        el.href = el.href.replace('your.email@example.com', cfg.emailUrl);
+    });
+}
+
 // Set current year - wrap in DOMContentLoaded for modules
 document.addEventListener('DOMContentLoaded', () => {
+    
+    populateConfig();
     document.getElementById('current-year').textContent = new Date().getFullYear();
     // Rest of your code here...
     
