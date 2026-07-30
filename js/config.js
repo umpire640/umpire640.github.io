@@ -26,7 +26,7 @@ const CFG = {
             tags: ["Robotics", "Automation"],
             image: "assets/images/project-2.jpg"
         },
-        {
+/*        {
             title: "Industrial Robotic Arm",
             description: "6-axis robotic arm with servo-controlled joints.",
             tags: ["Robotics", "Automation"],
@@ -37,7 +37,7 @@ const CFG = {
             description: "6-axis robotic arm with servo-controlled joints.",
             tags: ["Robotics", "Automation"],
             image: "assets/images/project-2.jpg"
-        }
+        }*/
     ],
 
     // ===== 3D MODELS =====
