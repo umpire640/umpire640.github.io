@@ -343,18 +343,26 @@ model-viewer:not(:defined)::after {
 
 
 /* ============================================
-   CAROUSEL STYLES
+   CAROUSEL STYLES - Full Width
    ============================================ */
 .carousel {
     position: relative;
-    overflow: hidden;
     width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .carousel-track {
     display: flex;
     transition: transform 0.5s ease;
-    gap: 2rem;
+}
+
+.carousel .portfolio-item,
+.carousel .model-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .carousel-btn {
@@ -382,11 +390,26 @@ model-viewer:not(:defined)::after {
 }
 
 .carousel-btn.prev {
-    left: 1rem;
+    left: -20px;
 }
 
 .carousel-btn.next {
-    right: 1rem;
+    right: -20px;
+}
+
+/* Mobile - buttons closer */
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    .carousel-btn.prev {
+        left: -15px;
+    }
+    .carousel-btn.next {
+        right: -15px;
+    }
 }
 
 /* ============================================
