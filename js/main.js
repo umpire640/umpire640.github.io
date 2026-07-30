@@ -72,11 +72,11 @@ function renderModel(m, i) {
     `;
 }
 
-// Simple carousel
+// Simple carousel - full width slides
 function renderCarousel(container, items, renderFn) {
     container.innerHTML = `
         <div class="carousel">
-            <div class="carousel-track" style="width: ${items.length * 100}%">
+            <div class="carousel-track">
                 ${items.map(renderFn).join('')}
             </div>
             <button class="carousel-btn prev">←</button>
@@ -89,8 +89,17 @@ function renderCarousel(container, items, renderFn) {
     const nextBtn = container.querySelector('.next');
     let currentIndex = 0;
 
+    // Set track width to N * 100%
+    track.style.width = `${items.length * 100}%`;
+
+    // Make each slide full width
+    container.querySelectorAll('.portfolio-item, .model-card').forEach(item => {
+        item.style.flex = '0 0 100%';
+        item.style.minWidth = '100%';
+    });
+
     function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * (100 / items.length)}%)`;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
     prevBtn.addEventListener('click', () => {
