@@ -11,9 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     
-    <!-- 3D Model Viewer -->
-    <script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
-    
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -54,65 +51,35 @@
             </div>
             
             <div class="portfolio-grid">
-                <!-- PROJECT 1 - Start -->
+                <!-- PROJECT 1 -->
                 <div class="portfolio-item reveal">
                     <img src="assets/images/project-1.jpg" alt="Gear Assembly" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop'; this.onerror=null;">
                     <div class="portfolio-content">
                         <h3 class="portfolio-title">Gear Assembly System</h3>
                         <p class="portfolio-description">
-                            Precision gear assembly designed for high-torque applications. Features modular components and optimized tooth profiles for minimal wear and maximum efficiency.
+                            Precision gear assembly designed for high-torque applications. Features modular components and optimized tooth profiles.
                         </p>
                         <div class="portfolio-tags">
                             <span class="tag">CAD Design</span>
                             <span class="tag">Mechanical</span>
-                            <span class="tag">Prototyping</span>
-                        </div>
-                        <div class="portfolio-actions">
-                            <a href="#models-3d" class="btn-icon">👁️ View 3D Model</a>
                         </div>
                     </div>
                 </div>
-                <!-- PROJECT 1 - End -->
 
-                <!-- PROJECT 2 - Start -->
+                <!-- PROJECT 2 -->
                 <div class="portfolio-item reveal delay-1">
                     <img src="assets/images/project-2.jpg" alt="Robotic Arm" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=500&fit=crop'; this.onerror=null;">
                     <div class="portfolio-content">
                         <h3 class="portfolio-title">Industrial Robotic Arm</h3>
                         <p class="portfolio-description">
-                            6-axis robotic arm with servo-controlled joints. Designed for pick-and-place operations with 0.1mm precision. Includes custom end-effectors for various applications.
+                            6-axis robotic arm with servo-controlled joints. Designed for pick-and-place operations with 0.1mm precision.
                         </p>
                         <div class="portfolio-tags">
                             <span class="tag">Robotics</span>
                             <span class="tag">Automation</span>
-                            <span class="tag">Servo Control</span>
-                        </div>
-                        <div class="portfolio-actions">
-                            <a href="#models-3d" class="btn-icon">👁️ View 3D Model</a>
                         </div>
                     </div>
                 </div>
-                <!-- PROJECT 2 - End -->
-
-                <!-- PROJECT 3 - Start -->
-                <div class="portfolio-item reveal delay-2">
-                    <img src="assets/images/project-3.jpg" alt="Heat Exchanger" class="portfolio-image" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=500&fit=crop'; this.onerror=null;">
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">Compact Heat Exchanger</h3>
-                        <p class="portfolio-description">
-                            High-efficiency plate-fin heat exchanger for aerospace applications. Optimized for thermal performance while minimizing weight and volume.
-                        </p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Thermal</span>
-                            <span class="tag">Aerospace</span>
-                            <span class="tag">CFD Analysis</span>
-                        </div>
-                        <div class="portfolio-actions">
-                            <a href="#models-3d" class="btn-icon">👁️ View 3D Model</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- PROJECT 3 - End -->
             </div>
         </div>
     </section>
@@ -123,26 +90,27 @@
             <div class="section-header">
                 <h2 class="reveal">Interactive 3D Models</h2>
                 <p class="section-subtitle reveal delay-1">
-                    Explore my 3D models in your browser. Rotate, zoom, and inspect every detail.<br>
-                    <small class="muted">Models may take a moment to load on first view.</small>
+                    Explore 3D models in your browser. Rotate, zoom, and inspect every detail.<br>
+                    <small class="muted">Click and drag to rotate. Scroll to zoom.</small>
                 </p>
             </div>
             
             <div class="model-showcase">
-                <!-- MODEL 1 - Free sample that works immediately -->
+                <!-- MODEL 1 - WORKING SAMPLE -->
                 <div class="model-card reveal">
-                    <h3>Sample Model (Works Now!)</h3>
+                    <h3>Sample Model (Works!)</h3>
                     <p class="model-description">
-                        This is a free sample model from Google. Replace with your own .glb file.
+                        Free sample model from Sketchfab. Replace with your own .glb file.
                     </p>
                     <div class="model-viewer-container">
                         <model-viewer 
                             src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
-                            alt="Sample 3D Model" 
+                            alt="Astronaut 3D Model" 
                             ar 
                             ar-modes="scene-viewer quick-look" 
                             camera-controls 
-                            enable-pan>
+                            enable-pan 
+                            poster="https://modelviewer.dev/shared-assets/models/Astronaut.webp">
                         </model-viewer>
                     </div>
                     <div class="model-info">
@@ -152,43 +120,26 @@
 
                 <!-- MODEL 2 - Your model -->
                 <div class="model-card reveal delay-1">
-                    <h3>Your Model 1</h3>
+                    <h3>Your Model Here</h3>
                     <p class="model-description">
-                        Description of your first 3D model. Explain what it is and its purpose.
+                        Add your own 3D model by uploading a .glb file to assets/models/
                     </p>
                     <div class="model-viewer-container">
                         <model-viewer 
-                            src="assets/models/dish.glb" 
-                            alt="Your Model 1" 
+                            src="assets/models/your-model.glb" 
+                            alt="Your 3D Model" 
                             ar 
                             ar-modes="scene-viewer quick-look" 
                             camera-controls 
                             enable-pan>
+                            <!-- Fallback content -->
+                            <div class="model-fallback">
+                                <p>Add your .glb file to <code>assets/models/your-model.glb</code></p>
+                            </div>
                         </model-viewer>
                     </div>
                     <div class="model-info">
-                        <strong>Format:</strong> GLB | <strong>Status:</strong> Add your .glb file to assets/models/
-                    </div>
-                </div>
-
-                <!-- MODEL 3 - Your model -->
-                <div class="model-card reveal delay-2">
-                    <h3>Your Model 2</h3>
-                    <p class="model-description">
-                        Description of your second 3D model.
-                    </p>
-                    <div class="model-viewer-container">
-                        <model-viewer 
-                            src="assets/models/telescope.glb" 
-                            alt="Your Model 2" 
-                            ar 
-                            ar-modes="scene-viewer quick-look" 
-                            camera-controls 
-                            enable-pan>
-                        </model-viewer>
-                    </div>
-                    <div class="model-info">
-                        <strong>Format:</strong> GLB | <strong>Status:</strong> Add your .glb file to assets/models/
+                        <strong>Status:</strong> Add your .glb file
                     </div>
                 </div>
             </div>
@@ -200,9 +151,10 @@
                 <ol>
                     <li><strong>Convert:</strong> Use <a href="https://gltf-pipeline.dev/" target="_blank">gltf-pipeline.dev</a> (free) to convert OBJ/FBX/STEP to .glb</li>
                     <li><strong>Upload:</strong> Place .glb files in <code>assets/models/</code></li>
-                    <li><strong>Update:</strong> Change <code>src="assets/models/your-model.glb"</code> in the model-viewer tags above</li>
+                    <li><strong>Update:</strong> Change <code>src="assets/models/your-model.glb"</code> in the model-viewer tag</li>
                     <li><strong>Test:</strong> The first model already works with a free sample!</li>
                 </ol>
+                <p style="margin-top: 1rem;"><strong>Free Models:</strong> <a href="https://sketchfab.com/3d-models?license=cc0" target="_blank">Sketchfab CC0</a></p>
             </div>
         </div>
     </section>
@@ -212,7 +164,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="reveal">Curriculum Vitae</h2>
-                <p class="section-subtitle reveal delay-1">My professional background, skills, and experience.</p>
+                <p class="section-subtitle reveal delay-1">My professional background and experience.</p>
             </div>
             
             <div class="cv-container">
@@ -227,59 +179,29 @@
                     <div class="cv-content">
                         <h3>Professional Summary</h3>
                         <p>
-                            Mechanical Engineer with 8+ years of experience in design, analysis, and manufacturing. 
-                            Specialized in CAD design, finite element analysis, and prototyping. Passionate about creating 
-                            innovative engineering solutions that balance form and function.
+                            Mechanical Engineer with experience in design, analysis, and manufacturing. 
+                            Specialized in CAD design and prototyping.
                         </p>
 
                         <h3>Education</h3>
                         <ul>
-                            <li><strong>MSc Mechanical Engineering</strong><br>Technical University of Denmark | 2018</li>
-                            <li><strong>BSc Mechanical Engineering</strong><br>Aalborg University | 2016</li>
+                            <li><strong>MSc Mechanical Engineering</strong><br>Technical University | Year</li>
                         </ul>
 
-                        <h3>Professional Experience</h3>
+                        <h3>Experience</h3>
                         <ul>
-                            <li><strong>Senior Mechanical Engineer</strong> | TechCorp A/S | 2020 - Present<br>
-                                Lead design and development of industrial machinery. Managed projects from concept to production, reducing manufacturing costs by 25% through DFM optimization.
-                            </li>
-                            <li><strong>Mechanical Design Engineer</strong> | Innovate DK | 2016 - 2020<br>
-                                Designed custom mechanical solutions for automotive and aerospace clients. Developed 50+ CAD models and performed FEA analysis for structural validation.
+                            <li><strong>Mechanical Engineer</strong> | Company | 2020 - Present<br>
+                                Design and development of mechanical systems.
                             </li>
                         </ul>
 
-                        <h3>Technical Skills</h3>
-                        <ul>
-                            <li><strong>CAD:</strong> SolidWorks (Expert), Fusion 360, AutoCAD, CATIA</li>
-                            <li><strong>Simulation:</strong> ANSYS, MATLAB, COMSOL Multiphysics</li>
-                            <li><strong>Manufacturing:</strong> CNC Machining, 3D Printing (FDM, SLA), Injection Molding</li>
-                            <li><strong>Programming:</strong> Python, MATLAB, C++, G-Code</li>
-                            <li><strong>Other:</strong> GD&T, Finite Element Analysis, Project Management</li>
-                        </ul>
-
-                        <h3>Certifications</h3>
-                        <ul>
-                            <li>Certified SolidWorks Professional (CSWP) | 2019</li>
-                            <li>Six Sigma Green Belt | 2021</li>
-                        </ul>
-
-                        <h3>Contact Information</h3>
+                        <h3>Contact</h3>
                         <p>
                             📧 <a href="mailto:your.email@example.com">your.email@example.com</a><br>
-                            📞 +45 XX XX XX XX<br>
                             🌐 <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> | 
                             <a href="https://github.com/yourusername" target="_blank">GitHub</a>
                         </p>
                     </div>
-                </div>
-
-                <div class="info-card reveal delay-1">
-                    <h3 style="margin-bottom: 1rem;">💡 How to Add Your CV</h3>
-                    <ol>
-                        <li><strong>Create PDF:</strong> Save as <code>cv.pdf</code></li>
-                        <li><strong>Upload:</strong> Place in <code>assets/cv/</code></li>
-                        <li><strong>Done!</strong> The download button works automatically</li>
-                    </ol>
                 </div>
             </div>
         </div>
@@ -290,7 +212,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="reveal">Get In Touch</h2>
-                <p class="section-subtitle reveal delay-1">Interested in collaborating or have questions about my work?</p>
+                <p class="section-subtitle reveal delay-1">Have questions or want to collaborate?</p>
             </div>
             
             <div class="contact-container">
@@ -298,9 +220,7 @@
                     <div class="contact-icon">📧</div>
                     <h2 class="contact-title">Let's Connect</h2>
                     <p class="contact-description">
-                        Whether you're looking for a mechanical engineer for your next project, 
-                        want to discuss a collaboration, or just have questions about my work, 
-                        feel free to reach out.
+                        Feel free to reach out about projects or collaborations.
                     </p>
                     
                     <div class="contact-methods">
@@ -316,13 +236,6 @@
                             <div class="contact-method-icon">🐙</div>
                             <a href="https://github.com/yourusername" target="_blank">GitHub</a>
                         </div>
-                    </div>
-
-                    <div class="contact-footer">
-                        <p>
-                            <strong>Response Time:</strong> Typically within 24-48 hours<br>
-                            <strong>Based in:</strong> Denmark (UTC+0)
-                        </p>
                     </div>
                 </div>
             </div>
@@ -341,7 +254,10 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- 3D Model Viewer Script - FIXED VERSION -->
+    <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@2.1.1/dist/model-viewer.min.js"></script>
+    
+    <!-- Main JavaScript -->
     <script src="js/main.js"></script>
 </body>
 </html>
