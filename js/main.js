@@ -92,37 +92,34 @@ function renderCarousel(container, items, renderFn) {
         </div>
     `;
 
-    const track = container.querySelector('.carousel-track');
-    const slides = container.querySelectorAll('.portfolio-item, .model-card');
-
-    const prevBtn = container.querySelector('.prev');
-    const nextBtn = container.querySelector('.next');
+    const track = container.querySelector(".carousel-track");
+    const prevBtn = container.querySelector(".prev");
+    const nextBtn = container.querySelector(".next");
 
     let currentIndex = 0;
+    const maxIndex = items.length - visibleSlides;
 
     function updateCarousel() {
-        const slideWidth = 100 / visibleSlides;
-
-        track.style.transform =
-            `translateX(-${currentIndex * slideWidth}%)`;
+        const translate = currentIndex * (100 / visibleSlides);
+        track.style.transform = `translateX(-${translate}%)`;
 
         prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= slides.length - visibleSlides;
+        nextBtn.disabled = currentIndex >= maxIndex;
     }
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.onclick = () => {
         if (currentIndex > 0) {
             currentIndex--;
             updateCarousel();
         }
-    });
+    };
 
-    nextBtn.addEventListener('click', () => {
-        if (currentIndex < slides.length - visibleSlides) {
+    nextBtn.onclick = () => {
+        if (currentIndex < maxIndex) {
             currentIndex++;
             updateCarousel();
         }
-    });
+    };
 
     updateCarousel();
 }
