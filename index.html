@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Project description goes here." />
+  <title>Project Title — Short Tagline</title>
+
+  <!-- Favicons (uncomment and replace) -->
+  <!-- <link rel="icon" href="/favicon.ico"> -->
+
+  <!-- Basic CSS: variables, reset, layout, utilities -->
+  <style>
+    /* Reset-ish */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--fg);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+    img,video,svg{max-width:100%;height:auto;display:block}
+
+    /* Theme variables */
+    :root{
+      --bg: #ffffff;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --card: #f8fafc;
+      --radius: 12px;
+      --container: 1100px;
+      --gap: 1.25rem;
+    }
+    [data-theme="dark"]{
+      --bg: #0b1220;
+      --fg: #e6eef8;
+      --muted: #9aa7bf;
+      --accent: #3b82f6;
+      --card: #071027;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important;animation:none!important}
+    }
+
+    /* Layout */
+    .site{min-height:100vh;display:flex;flex-direction:column}
+    header{background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);padding:0.75rem 1rem}
+    .container{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--gap)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:inherit;font-weight:600}
+    .logo{width:40px;height:40px;border-radius:8px;background:var(--accent);display:inline-grid;place-items:center;color:white;font-weight:700}
+
+    /* Nav */
+    nav{display:flex;gap:.5rem;align-items:center}
+    .nav-links{display:flex;gap:.5rem}
+    .nav-links a{padding:.5rem .75rem;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500}
+    .nav-links a:hover{color:var(--fg);background:rgba(0,0,0,0.03)}
+    .actions{display:flex;gap:.5rem;align-items:center}
+
+    /* Mobile nav */
+    .mobile-toggle{display:none;background:transparent;border:1px solid rgba(0,0,0,0.06);padding:.4rem;border-radius:8px}
+    @media (max-width:800px){
+      .nav-links{display:none}
+      .mobile-toggle{display:inline-flex}
+      .mobile-menu{display:none;flex-direction:column;padding:.75rem;border-radius:10px;margin-top:.5rem;background:var(--card)}
+      .mobile-menu a{padding:.5rem 0}
+      .mobile-menu.show{display:flex}
+    }
+
+    /* Hero */
+    .hero{padding:3.5rem 0 2.5rem}
+    .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start}
+    .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .eyebrow{color:var(--muted);font-size:.875rem;font-weight:600;letter-spacing:.04em}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.25rem}
+    .feature{padding:1rem;background:transparent;border-radius:10px}
+
+    /* Footer */
+    footer{margin-top:auto;padding:1.5rem 0;color:var(--muted);font-size:.9rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+    /* Utilities */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:10px;border:none;background:var(--accent);color:white;text-decoration:none;font-weight:600;cursor:pointer}
+    .muted{color:var(--muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Content spacing */
+    main{padding:0 0 3rem}
+    h1{margin:.25rem 0;font-size:1.75rem}
+    p.lead{margin:0;color:var(--muted)}
+    .stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+    .chip{background:rgba(0,0,0,0.04);padding:.25rem .5rem;border-radius:999px;font-weight:600;color:var(--muted);font-size:.85rem}
+  </style>
+</head>
+<body class="site" data-theme="light">
+  <!-- Skip link for keyboard users -->
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <div class="topbar" role="navigation" aria-label="Top navigation">
+        <a class="brand" href="/">
+          <span class="logo" aria-hidden="true">P</span>
+          <span>
+            <div style="line-height:1">Project Title</div>
+            <div style="font-size:.8rem;color:var(--muted);margin-top:2px">Short tagline</div>
+          </span>
+        </a>
+
+        <nav>
+          <div class="nav-links" aria-hidden="false">
+            <a href="#features">Features</a>
+            <a href="#docs">Docs</a>
+            <a href="#about">About</a>
+          </div>
+
+          <div class="actions">
+            <button id="theme-toggle" class="mobile-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+            <button id="mobile-open" class="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Mobile menu (hidden on wide screens) -->
+      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <a href="#features">Features</a>
+        <a href="#docs">Docs</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" tabindex="-1">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Welcome</p>
+          <h1>Build something great.</h1>
+          <p class="lead">A short descriptive paragraph that explains what this project does and who it's for. Replace this with your project's mission statement or quick summary.</p>
+
+          <div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center">
+            <a class="btn" href="#get-started">Get started</a>
+            <a class="btn" href="#docs" style="background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--fg)">Documentation</a>
+          </div>
+
+          <div class="stack" aria-hidden="true">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">Vanilla JS</span>
+            <span class="chip">Accessibility</span>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="Quick links">
+          <strong>Quick links</strong>
+          <ul style="margin:.5rem 0 0;padding:0;list-style:none">
+            <li style="margin:.5rem 0"><a href="#features">Key features</a></li>
+            <li style="margin:.5rem 0"><a href="#docs">Guides</a></li>
+            <li style="margin:.5rem 0"><a href="#about">About the project</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features" class="card" style="margin-top:1rem">
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>Accessible by default</h3>
+          <p class="muted">Semantic markup, skip links, keyboard focus targets, and attention to color contrast.</p>
+        </div>
+        <div class="feature">
+          <h3>Responsive layout</h3>
+          <p class="muted">A simple grid and flexible components that adapt to narrow and wide screens.</p>
+        </div>
+        <div class="feature">
+          <h3>Light & dark theme</h3>
+          <p class="muted">Toggle theme with a small script—persists across visits.</p>
+        </div>
+        <div class="feature">
+          <h3>Single-file template</h3>
+          <p class="muted">Drop in this file and customize: styles, scripts, and content are all in one place.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="docs" style="margin-top:1rem">
+      <div class="card">
+        <h2>Documentation</h2>
+        <p class="muted">Add links to your README, API docs, or guides here.</p>
+        <ol>
+          <li><a href="#get-started">Getting started</a></li>
+          <li><a href="#usage">Usage</a></li>
+          <li><a href="#contribute">Contributing</a></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="about" style="margin-top:1rem">
+      <div class="card">
+        <h2>About</h2>
+        <p class="muted">Replace with project background, license, maintainers, and links to the repository or issues.</p>
+      </div>
+    </section>
+
+    <section id="get-started" style="margin-top:1rem">
+      <div class="card">
+        <h2>Get started</h2>
+        <p class="muted">Examples, quick commands, or a code snippet to help users begin.</p>
+
+        <pre style="background:rgba(0,0,0,0.03);padding:.75rem;border-radius:8px;margin-top:.75rem"><code>git clone https://github.com/your/repo.git
+cd repo
+# open index.html in your browser</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Project Title — <span class="muted">Made with care</span></div>
+      <div class="muted">Built for clarity • <a href="/LICENSE">License</a></div>
+    </div>
+  </footer>
+
+  <!-- Minimal JS: theme toggle, mobile menu, small accessibility helpers -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const body = document.body;
+      const themeToggle = document.getElementById('theme-toggle');
+      const mobileOpen = document.getElementById('mobile-open');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const yearEl = document.getElementById('year');
+
+      // Set year
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Theme handling: 'light' or 'dark'
+      const saved = localStorage.getItem('site-theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'light');
+      body.setAttribute('data-theme', initial);
+
+      function updateTheme(theme){
+        body.setAttribute('data-theme', theme);
+        localStorage.setItem('site-theme', theme);
+        themeToggle.setAttribute('aria-pressed', theme === 'dark');
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      }
+
+      themeToggle.addEventListener('click', function(){
+        const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        updateTheme(next);
+      });
+
+      // Mobile menu toggle
+      mobileOpen.addEventListener('click', function(){
+        const isOpen = mobileMenu.classList.toggle('show');
+        mobileMenu.setAttribute('aria-hidden', !isOpen);
+        mobileOpen.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Keyboard: close mobile menu on Escape
+      window.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
+          mobileMenu.classList.remove('show');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          mobileOpen.setAttribute('aria-expanded', 'false');
+          mobileOpen.focus();
+        }
+      });
+
+      // Ensure theme button reflects current theme on load
+      updateTheme(body.getAttribute('data-theme') || 'light');
+    })();
+  </script>
+</body>
+</html>
