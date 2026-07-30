@@ -1,279 +1,1146 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Project description goes here." />
-  <title>Project Title — Short Tagline</title>
-
-  <!-- Favicons (uncomment and replace) -->
-  <!-- <link rel="icon" href="/favicon.ico"> -->
-
-  <!-- Basic CSS: variables, reset, layout, utilities -->
-  <style>
-    /* Reset-ish */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;color:var(--fg);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
-    img,video,svg{max-width:100%;height:auto;display:block}
-
-    /* Theme variables */
-    :root{
-      --bg: #ffffff;
-      --fg: #111827;
-      --muted: #6b7280;
-      --accent: #2563eb;
-      --card: #f8fafc;
-      --radius: 12px;
-      --container: 1100px;
-      --gap: 1.25rem;
-    }
-    [data-theme="dark"]{
-      --bg: #0b1220;
-      --fg: #e6eef8;
-      --muted: #9aa7bf;
-      --accent: #3b82f6;
-      --card: #071027;
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{transition:none!important;animation:none!important}
-    }
-
-    /* Layout */
-    .site{min-height:100vh;display:flex;flex-direction:column}
-    header{background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);padding:0.75rem 1rem}
-    .container{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--gap)}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;color:inherit;font-weight:600}
-    .logo{width:40px;height:40px;border-radius:8px;background:var(--accent);display:inline-grid;place-items:center;color:white;font-weight:700}
-
-    /* Nav */
-    nav{display:flex;gap:.5rem;align-items:center}
-    .nav-links{display:flex;gap:.5rem}
-    .nav-links a{padding:.5rem .75rem;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:500}
-    .nav-links a:hover{color:var(--fg);background:rgba(0,0,0,0.03)}
-    .actions{display:flex;gap:.5rem;align-items:center}
-
-    /* Mobile nav */
-    .mobile-toggle{display:none;background:transparent;border:1px solid rgba(0,0,0,0.06);padding:.4rem;border-radius:8px}
-    @media (max-width:800px){
-      .nav-links{display:none}
-      .mobile-toggle{display:inline-flex}
-      .mobile-menu{display:none;flex-direction:column;padding:.75rem;border-radius:10px;margin-top:.5rem;background:var(--card)}
-      .mobile-menu a{padding:.5rem 0}
-      .mobile-menu.show{display:flex}
-    }
-
-    /* Hero */
-    .hero{padding:3.5rem 0 2.5rem}
-    .hero-grid{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start}
-    .card{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:0 6px 18px rgba(2,6,23,0.06)}
-    .eyebrow{color:var(--muted);font-size:.875rem;font-weight:600;letter-spacing:.04em}
-
-    /* Features */
-    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.25rem}
-    .feature{padding:1rem;background:transparent;border-radius:10px}
-
-    /* Footer */
-    footer{margin-top:auto;padding:1.5rem 0;color:var(--muted);font-size:.9rem}
-    .footer-inner{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-
-    /* Utilities */
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:10px;border:none;background:var(--accent);color:white;text-decoration:none;font-weight:600;cursor:pointer}
-    .muted{color:var(--muted)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* Content spacing */
-    main{padding:0 0 3rem}
-    h1{margin:.25rem 0;font-size:1.75rem}
-    p.lead{margin:0;color:var(--muted)}
-    .stack{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
-    .chip{background:rgba(0,0,0,0.04);padding:.25rem .5rem;border-radius:999px;font-weight:600;color:var(--muted);font-size:.85rem}
-  </style>
-</head>
-<body class="site" data-theme="light">
-  <!-- Skip link for keyboard users -->
-  <a class="sr-only" href="#main">Skip to content</a>
-
-  <header>
-    <div class="container">
-      <div class="topbar" role="navigation" aria-label="Top navigation">
-        <a class="brand" href="/">
-          <span class="logo" aria-hidden="true">P</span>
-          <span>
-            <div style="line-height:1">Project Title</div>
-            <div style="font-size:.8rem;color:var(--muted);margin-top:2px">Short tagline</div>
-          </span>
-        </a>
-
-        <nav>
-          <div class="nav-links" aria-hidden="false">
-            <a href="#features">Features</a>
-            <a href="#docs">Docs</a>
-            <a href="#about">About</a>
-          </div>
-
-          <div class="actions">
-            <button id="theme-toggle" class="mobile-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
-            <button id="mobile-open" class="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu">☰</button>
-          </div>
-        </nav>
-      </div>
-
-      <!-- Mobile menu (hidden on wide screens) -->
-      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-        <a href="#features">Features</a>
-        <a href="#docs">Docs</a>
-        <a href="#about">About</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="main" class="container" tabindex="-1">
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">Welcome</p>
-          <h1>Build something great.</h1>
-          <p class="lead">A short descriptive paragraph that explains what this project does and who it's for. Replace this with your project's mission statement or quick summary.</p>
-
-          <div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center">
-            <a class="btn" href="#get-started">Get started</a>
-            <a class="btn" href="#docs" style="background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--fg)">Documentation</a>
-          </div>
-
-          <div class="stack" aria-hidden="true">
-            <span class="chip">HTML</span>
-            <span class="chip">CSS</span>
-            <span class="chip">Vanilla JS</span>
-            <span class="chip">Accessibility</span>
-          </div>
-        </div>
-
-        <aside class="card" aria-label="Quick links">
-          <strong>Quick links</strong>
-          <ul style="margin:.5rem 0 0;padding:0;list-style:none">
-            <li style="margin:.5rem 0"><a href="#features">Key features</a></li>
-            <li style="margin:.5rem 0"><a href="#docs">Guides</a></li>
-            <li style="margin:.5rem 0"><a href="#about">About the project</a></li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section id="features" class="card" style="margin-top:1rem">
-      <h2>Features</h2>
-      <div class="features">
-        <div class="feature">
-          <h3>Accessible by default</h3>
-          <p class="muted">Semantic markup, skip links, keyboard focus targets, and attention to color contrast.</p>
-        </div>
-        <div class="feature">
-          <h3>Responsive layout</h3>
-          <p class="muted">A simple grid and flexible components that adapt to narrow and wide screens.</p>
-        </div>
-        <div class="feature">
-          <h3>Light & dark theme</h3>
-          <p class="muted">Toggle theme with a small script—persists across visits.</p>
-        </div>
-        <div class="feature">
-          <h3>Single-file template</h3>
-          <p class="muted">Drop in this file and customize: styles, scripts, and content are all in one place.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="docs" style="margin-top:1rem">
-      <div class="card">
-        <h2>Documentation</h2>
-        <p class="muted">Add links to your README, API docs, or guides here.</p>
-        <ol>
-          <li><a href="#get-started">Getting started</a></li>
-          <li><a href="#usage">Usage</a></li>
-          <li><a href="#contribute">Contributing</a></li>
-        </ol>
-      </div>
-    </section>
-
-    <section id="about" style="margin-top:1rem">
-      <div class="card">
-        <h2>About</h2>
-        <p class="muted">Replace with project background, license, maintainers, and links to the repository or issues.</p>
-      </div>
-    </section>
-
-    <section id="get-started" style="margin-top:1rem">
-      <div class="card">
-        <h2>Get started</h2>
-        <p class="muted">Examples, quick commands, or a code snippet to help users begin.</p>
-
-        <pre style="background:rgba(0,0,0,0.03);padding:.75rem;border-radius:8px;margin-top:.75rem"><code>git clone https://github.com/your/repo.git
-cd repo
-# open index.html in your browser</code></pre>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Project Title — <span class="muted">Made with care</span></div>
-      <div class="muted">Built for clarity • <a href="/LICENSE">License</a></div>
-    </div>
-  </footer>
-
-  <!-- Minimal JS: theme toggle, mobile menu, small accessibility helpers -->
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const body = document.body;
-      const themeToggle = document.getElementById('theme-toggle');
-      const mobileOpen = document.getElementById('mobile-open');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const yearEl = document.getElementById('year');
-
-      // Set year
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // Theme handling: 'light' or 'dark'
-      const saved = localStorage.getItem('site-theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initial = saved || (prefersDark ? 'dark' : 'light');
-      body.setAttribute('data-theme', initial);
-
-      function updateTheme(theme){
-        body.setAttribute('data-theme', theme);
-        localStorage.setItem('site-theme', theme);
-        themeToggle.setAttribute('aria-pressed', theme === 'dark');
-        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-      }
-
-      themeToggle.addEventListener('click', function(){
-        const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        updateTheme(next);
-      });
-
-      // Mobile menu toggle
-      mobileOpen.addEventListener('click', function(){
-        const isOpen = mobileMenu.classList.toggle('show');
-        mobileMenu.setAttribute('aria-hidden', !isOpen);
-        mobileOpen.setAttribute('aria-expanded', isOpen);
-      });
-
-      // Keyboard: close mobile menu on Escape
-      window.addEventListener('keydown', function(e){
-        if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
-          mobileMenu.classList.remove('show');
-          mobileMenu.setAttribute('aria-hidden', 'true');
-          mobileOpen.setAttribute('aria-expanded', 'false');
-          mobileOpen.focus();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mechanical Engineering 3D Portfolio - [Your Name]">
+    <title>[Your Name] | Mechanical Engineer | 3D Portfolio</title>
+    
+    <!-- CSS Variables for easy theming -->
+    <style>
+        :root {
+            /* === THEME COLORS - Edit these to change the look === */
+            --primary-color: #2563eb;       /* Main accent color */
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;    /* Slate gray */
+            --background-color: #0f172a;   /* Dark navy background */
+            --surface-color: #1e293b;       /* Card/section background */
+            --surface-hover: #334155;
+            --text-primary: #f8fafc;         /* Main text */
+            --text-secondary: #94a3b8;     /* Secondary text */
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'Fira Code', 'Courier New', monospace;
+            
+            /* Spacing */
+            --section-padding: 4rem 2rem;
+            --card-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.3);
         }
-      });
 
-      // Ensure theme button reflects current theme on load
-      updateTheme(body.getAttribute('data-theme') || 'light');
-    })();
-  </script>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.3rem, 3vw, 1.75rem); }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: var(--section-padding);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--background-color) 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23334155" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Portfolio Section */
+        #portfolio {
+            background: var(--background-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: var(--border-color);
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .portfolio-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--surface-hover);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 3D Model Viewer Section */
+        #models-3d {
+            background: linear-gradient(180deg, var(--background-color) 0%, #1a1a2e 100%);
+        }
+
+        .models-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .model-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .model-card {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .model-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .model-viewer-container {
+            width: 100%;
+            height: 350px;
+            background: var(--surface-hover);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* When model-viewer is not available, show placeholder */
+        .model-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--surface-hover) 0%, var(--border-color) 100%);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .model-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .model-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* CV Section */
+        #cv {
+            background: var(--background-color);
+        }
+
+        .cv-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cv-card {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cv-title {
+            font-size: 2rem;
+        }
+
+        .cv-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--primary-color);
+        }
+
+        .cv-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .cv-content h3 {
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cv-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cv-content li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .cv-content li::before {
+            content: '•';
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, var(--background-color) 100%);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-title {
+            margin-bottom: 1rem;
+        }
+
+        .contact-description {
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--surface-hover);
+            border-radius: 10px;
+            transition: var(--transition);
+            min-width: 150px;
+        }
+
+        .contact-method:hover {
+            background: var(--border-color);
+            transform: translateY(-3px);
+        }
+
+        .contact-method-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .contact-method a {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .contact-method a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .model-viewer-container {
+                height: 300px;
+            }
+
+            .cv-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-methods {
+                gap: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Delay animations for staggered effect */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    
+    <!-- Google Fonts - Will work on GitHub Pages -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                [Your <span>Name</span>]
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#models-3d">3D Models</a></li>
+                    <li><a href="#cv">CV</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in-up">Mechanical Engineering <span style="color: var(--primary-color);">Portfolio</span></h1>
+            <p class="hero-subtitle animate-fade-in-up delay-1">
+                Precision engineering meets creative design. Explore my collection of mechanical designs, 3D models, and engineering solutions.
+            </p>
+            <a href="#portfolio" class="cta-button animate-fade-in-up delay-2">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section - Image Gallery -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Portfolio</h2>
+                <p class="section-subtitle reveal delay-1">
+                    A curated selection of my mechanical engineering projects, renders, and designs.
+                </p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Portfolio Item 1 - EDIT THIS -->
+                <div class="portfolio-item reveal">
+                    <img src="assets/images/project-1.jpg" alt="Project 1" class="portfolio-image" onerror="this.src='https://via.placeholder.com/400x250?text=Add+Image'; this.onerror=null;">
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Project Title 1</h3>
+                        <p class="portfolio-description">
+                            Brief description of this mechanical design or project. Explain the purpose and key features.
+                        </p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Design</span>
+                            <span class="tag">3D Modeling</span>
+                            <span class="tag">Prototyping</span>
+                        </div>
+                        <div class="portfolio-actions">
+                            <a href="#" class="btn-icon">
+                                <span>👁️</span> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 - EDIT THIS -->
+                <div class="portfolio-item reveal delay-1">
+                    <img src="assets/images/project-2.jpg" alt="Project 2" class="portfolio-image" onerror="this.src='https://via.placeholder.com/400x250?text=Add+Image'; this.onerror=null;">
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Project Title 2</h3>
+                        <p class="portfolio-description">
+                            Description of your second project. Highlight the engineering challenges and solutions.
+                        </p>
+                        <div class="portfolio-tags">
+                            <span class="tag">CAD</span>
+                            <span class="tag">Simulation</span>
+                        </div>
+                        <div class="portfolio-actions">
+                            <a href="#" class="btn-icon">
+                                <span>👁️</span> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 - EDIT THIS -->
+                <div class="portfolio-item reveal delay-2">
+                    <img src="assets/images/project-3.jpg" alt="Project 3" class="portfolio-image" onerror="this.src='https://via.placeholder.com/400x250?text=Add+Image'; this.onerror=null;">
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Project Title 3</h3>
+                        <p class="portfolio-description">
+                            Another project description. Mention materials, dimensions, or special features.
+                        </p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Manufacturing</span>
+                            <span class="tag">Assembly</span>
+                        </div>
+                        <div class="portfolio-actions">
+                            <a href="#" class="btn-icon">
+                                <span>👁️</span> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more portfolio items as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Models Section -->
+    <section id="models-3d" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Interactive 3D Models</h2>
+                <p class="section-subtitle reveal delay-1">
+                    Explore my 3D models in your browser. Rotate, zoom, and inspect every detail.
+                    <br><small style="color: var(--text-muted);">Models load automatically. May take a moment on first view.</small>
+                </p>
+            </div>
+            
+            <div class="model-showcase">
+                <!-- 3D Model 1 - EDIT THIS -->
+                <div class="model-card reveal">
+                    <h3>Model Name 1</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+                        Description of this 3D model. Explain its purpose and features.
+                    </p>
+                    <div class="model-viewer-container">
+                        <!-- 
+                        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        3D MODEL VIEWER INSTRUCTIONS:
+                        
+                        1. Upload your GLB/GLTF files to: assets/models/
+                        2. Replace the src below with your model path
+                        3. For GitHub Pages, add this script to your HTML head:
+                           <script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+                        
+                        FREE CONVERSION: Use https://gltf-pipeline.dev/ to convert
+                        OBJ/FBX/STEP to GLB format.
+                        
+                        EXAMPLE MODEL (free test model):
+                        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                        -->
+                        
+                        <!-- Placeholder for when script isn't loaded in canvas preview -->
+                        <div class="model-placeholder" id="model-placeholder-1">
+                            <div class="model-placeholder-icon">🔧</div>
+                            <div>3D Model: Model Name 1</div>
+                            <small style="margin-top: 0.5rem;">Add model-viewer script for interactive viewing</small>
+                        </div>
+                        
+                        <!-- Actual model viewer - works on GitHub Pages -->
+                        <!-- <model-viewer src="assets/models/model-1.glb" alt="Model 1" ar ar-modes="scene-viewer quick-look" camera-controls enable-pan></model-viewer> -->
+                    </div>
+                    <div class="model-info">
+                        <strong>Format:</strong> GLB/GLTF<br>
+                        <strong>Size:</strong> ~X MB<br>
+                        <strong>Polygons:</strong> ~X,XXX
+                    </div>
+                </div>
+
+                <!-- 3D Model 2 - EDIT THIS -->
+                <div class="model-card reveal delay-1">
+                    <h3>Model Name 2</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+                        Another 3D model with different features or design approach.
+                    </p>
+                    <div class="model-viewer-container">
+                        <div class="model-placeholder" id="model-placeholder-2">
+                            <div class="model-placeholder-icon">🔧</div>
+                            <div>3D Model: Model Name 2</div>
+                            <small style="margin-top: 0.5rem;">Add model-viewer script for interactive viewing</small>
+                        </div>
+                        <!-- <model-viewer src="assets/models/model-2.glb" alt="Model 2" ar ar-modes="scene-viewer quick-look" camera-controls enable-pan></model-viewer> -->
+                    </div>
+                    <div class="model-info">
+                        <strong>Format:</strong> GLB/GLTF<br>
+                        <strong>Size:</strong> ~X MB
+                    </div>
+                </div>
+
+                <!-- 3D Model 3 - EDIT THIS -->
+                <div class="model-card reveal delay-2">
+                    <h3>Model Name 3</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem;">
+                        Complex assembly or detailed mechanical part.
+                    </p>
+                    <div class="model-viewer-container">
+                        <div class="model-placeholder" id="model-placeholder-3">
+                            <div class="model-placeholder-icon">🔧</div>
+                            <div>3D Model: Model Name 3</div>
+                            <small style="margin-top: 0.5rem;">Add model-viewer script for interactive viewing</small>
+                        </div>
+                        <!-- <model-viewer src="assets/models/model-3.glb" alt="Model 3" ar ar-modes="scene-viewer quick-look" camera-controls enable-pan></model-viewer> -->
+                    </div>
+                    <div class="model-info">
+                        <strong>Format:</strong> GLB/GLTF<br>
+                        <strong>Features:</strong> Animations, Materials
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: 3rem;">
+                <h3 class="reveal">How to Add Your 3D Models</h3>
+            </div>
+            <div class="cv-card reveal delay-1" style="margin-top: 1.5rem;">
+                <ol style="color: var(--text-secondary); line-height: 2;">
+                    <li><strong>Convert your models:</strong> Use <a href="https://gltf-pipeline.dev/" target="_blank" style="color: var(--primary-color);">gltf-pipeline.dev</a> to convert OBJ, FBX, STEP, or other formats to GLB (recommended) or GLTF.</li>
+                    <li><strong>Upload to GitHub:</strong> Place your .glb files in the <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">assets/models/</code> folder.</li>
+                    <li><strong>Update the HTML:</strong> Uncomment and update the <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">&lt;model-viewer&gt;</code> tags above with your model paths.</li>
+                    <li><strong>Add the script:</strong> In your final deployed HTML, add this before <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">&lt;/body&gt;</code>:
+                        <pre style="background: var(--surface-hover); padding: 1rem; border-radius: 8px; margin-top: 0.5rem; overflow-x: auto; font-family: var(--font-mono); font-size: 0.85rem;">&lt;script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"&gt;&lt;/script&gt;</pre>
+                    </li>
+                    <li><strong>Free test model:</strong> Try it with <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"</code></li>
+                </ol>
+                <p style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                    <strong>Note:</strong> The model-viewer script is loaded from Google's CDN and works on GitHub Pages. 
+                    It may not load in the canvas preview, but will work when you deploy to your GitHub Pages site.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Curriculum Vitae</h2>
+                <p class="section-subtitle reveal delay-1">
+                    My professional background, skills, and experience in mechanical engineering.
+                </p>
+            </div>
+            
+            <div class="cv-container">
+                <div class="cv-card reveal">
+                    <div class="cv-header">
+                        <h2 class="cv-title">[Your Name]</h2>
+                        <div class="cv-actions">
+                            <a href="assets/cv/your-cv.pdf" class="btn btn-primary" download>
+                                📥 Download PDF
+                            </a>
+                            <!-- Alternative: Link to Google Docs or LinkedIn -->
+                            <!-- <a href="#" class="btn btn-secondary">View Online</a> -->
+                        </div>
+                    </div>
+                    
+                    <!-- CV Content - EDIT THIS -->
+                    <div class="cv-content">
+                        <h3>Professional Summary</h3>
+                        <p>
+                            Mechanical Engineer with [X] years of experience in design, analysis, and manufacturing. 
+                            Specialized in [your specializations]. Passionate about creating innovative engineering solutions.
+                        </p>
+
+                        <h3>Education</h3>
+                        <ul>
+                            <li><strong>Master of Science in Mechanical Engineering</strong><br>
+                                University Name, Year of Graduation</li>
+                            <li><strong>Bachelor of Science in Mechanical Engineering</strong><br>
+                                University Name, Year of Graduation</li>
+                        </ul>
+
+                        <h3>Professional Experience</h3>
+                        <ul>
+                            <li><strong>Senior Mechanical Engineer</strong> | Company Name | 2020 - Present<br>
+                                Description of responsibilities and achievements. Focus on quantifiable results.
+                            </li>
+                            <li><strong>Mechanical Design Engineer</strong> | Company Name | 2017 - 2020<br>
+                                Description of your role and key projects.
+                            </li>
+                        </ul>
+
+                        <h3>Skills</h3>
+                        <ul>
+                            <li><strong>CAD Software:</strong> SolidWorks, AutoCAD, Fusion 360, CATIA</li>
+                            <li><strong>Simulation:</strong> ANSYS, MATLAB, COMSOL</li>
+                            <li><strong>Manufacturing:</strong> CNC, 3D Printing, Injection Molding</li>
+                            <li><strong>Programming:</strong> Python, MATLAB, C++</li>
+                            <li><strong>Other:</strong> Finite Element Analysis, GD&T, Project Management</li>
+                        </ul>
+
+                        <h3>Certifications</h3>
+                        <ul>
+                            <li>Certification Name | Issuer | Year</li>
+                            <li>Another Certification | Issuer | Year</li>
+                        </ul>
+
+                        <h3>Contact Information</h3>
+                        <p>
+                            📧 <a href="mailto:your.email@example.com" style="color: var(--primary-color);">your.email@example.com</a><br>
+                            📞 +XX XXX XXX XXXX<br>
+                            🌐 <a href="https://linkedin.com/in/yourprofile" target="_blank" style="color: var(--primary-color);">LinkedIn</a> | 
+                            <a href="https://github.com/yourusername" target="_blank" style="color: var(--primary-color);">GitHub</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cv-card reveal delay-1">
+                    <h3 style="margin-bottom: 1rem;">💡 How to Add Your CV</h3>
+                    <ol style="color: var(--text-secondary); line-height: 2;">
+                        <li><strong>Create PDF:</strong> Save your CV as a PDF file named <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">your-cv.pdf</code></li>
+                        <li><strong>Upload to GitHub:</strong> Place it in the <code style="background: var(--surface-hover); padding: 0.1rem 0.3rem; border-radius: 4px;">assets/cv/</code> folder</li>
+                        <li><strong>Update the link:</strong> Change the href in the Download button above to match your filename</li>
+                        <li><strong>Alternative:</strong> Replace the content above with your CV text, or link to an external CV</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Get In Touch</h2>
+                <p class="section-subtitle reveal delay-1">
+                    Interested in collaborating or have questions about my work? I'd love to hear from you.
+                </p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-card reveal">
+                    <div class="contact-icon">📧</div>
+                    <h2 class="contact-title">Let's Connect</h2>
+                    <p class="contact-description">
+                        Whether you're looking for a mechanical engineer for your next project, 
+                        want to discuss a collaboration, or just have questions about my work, 
+                        feel free to reach out.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-method-icon">✉️</div>
+                            <a href="mailto:your.email@example.com">Email Me</a>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-method-icon">💼</div>
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-method-icon">🐙</div>
+                            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                        </div>
+                        <!-- Add more contact methods as needed -->
+                    </div>
+
+                    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                        <p style="color: var(--text-muted);">
+                            <strong>Response Time:</strong> Typically within 24-48 hours<br>
+                            <strong>Based in:</strong> Denmark (UTC+0)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                © <span id="current-year"></span> [Your Name]. All rights reserved.
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" class="social-link" target="_blank" title="GitHub">🐙</a>
+                <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank" title="LinkedIn">💼</a>
+                <a href="mailto:your.email@example.com" class="social-link" title="Email">✉️</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('revealed');
+                }
+            });
+        };
+
+        // Run on load and scroll
+        window.addEventListener('load', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add active state styling
+        const style = document.createElement('style');
+        style.textContent = `
+            nav a.active {
+                color: var(--primary-color);
+            }
+            nav a.active::after {
+                width: 100%;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Console welcome message
+        console.log('%c👋 Welcome to my portfolio! ', 'background: #2563eb; color: white; font-size: 16px; padding: 5px;');
+        console.log('%cBuilt with HTML, CSS & JavaScript. ', 'color: #64748b;');
+    </script>
+
+    <!-- 
+    =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    IMPORTANT: Add this script tag BEFORE the closing </body> tag for 3D models:
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+    
+    =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    -->
 </body>
 </html>
