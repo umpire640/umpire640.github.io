@@ -86,8 +86,10 @@ function renderCarousel(container, items, renderFn) {
 
     container.innerHTML = `
         <div class="carousel">
-            <div class="carousel-track">
+            <div class="carousel-track-wrapper">
+                <div class="carousel-track">
                 ${items.map(renderFn).join('')}
+                </div>
             </div>
 
             <button class="carousel-btn prev">←</button>
