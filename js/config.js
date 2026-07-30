@@ -25,6 +25,18 @@ const CFG = {
             description: "6-axis robotic arm with servo-controlled joints.",
             tags: ["Robotics", "Automation"],
             image: "assets/images/project-2.jpg"
+        },
+        {
+            title: "Industrial Robotic Arm",
+            description: "6-axis robotic arm with servo-controlled joints.",
+            tags: ["Robotics", "Automation"],
+            image: "assets/images/project-2.jpg"
+        },
+        {
+            title: "Industrial Robotic Arm",
+            description: "6-axis robotic arm with servo-controlled joints.",
+            tags: ["Robotics", "Automation"],
+            image: "assets/images/project-2.jpg"
         }
     ],
 
@@ -42,7 +54,20 @@ const CFG = {
             description: "Add your own .glb file.",
             file: "assets/models/telescope.glb",
             isSample: false
-        }
+        },
+        {
+            title: "Another Model",
+            description: "Add your own .glb file.",
+            file: "assets/models/dish.glb",
+            isSample: false
+        },
+        {
+            title: "One more Model",
+            description: "Free sample from Google.",
+            file: "https://modelviewer.dev/shared-assets/models/EmissiveStrengthTest.glb",
+            poster: "https://modelviewer.dev/shared-assets/models/EmissiveStrengthTest.webp",
+            isSample: true
+        }        
     ],
 
     // URLs
