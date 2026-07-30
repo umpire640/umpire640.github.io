@@ -343,141 +343,126 @@ model-viewer:not(:defined)::after {
 
 
 /* ============================================
-   CAROUSEL STYLES - Full Width
-   ============================================ */
-/* ============================================
    CAROUSEL
    ============================================ */
 
 .carousel {
     position: relative;
-    grid-column: 1 / -1;
     width: 100%;
+    grid-column: 1 / -1;
+    padding: 0 55px;
+}
+
+.carousel-track-wrapper {
     overflow: hidden;
-    padding: 0 60px;
+    width: 100%;
 }
 
 .carousel-track {
     display: flex;
-    gap: 2rem;              /* match your grid gap */
-    transition: transform .35s ease;
+    gap: 1.5rem;
+    transition: transform 0.45s ease;
+    will-change: transform;
 }
 
+/* Cards inside carousel */
 .carousel .portfolio-item,
 .carousel .model-card {
-    flex: 0 0 calc((100% - 4rem) / 3);
-    max-width: calc((100% - 4rem) / 3);
-    padding: 0;
+    flex: 0 0 calc((100% - 3rem) / 3);
+    max-width: calc((100% - 3rem) / 3);
+
+    /* match normal grid cards */
+    padding: 1rem;
     box-sizing: border-box;
 }
 
-/* Buttons */
-
-.carousel-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(37,99,235,.95);
-    color: #fff;
-    font-size: 1.4rem;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,0,0,.25);
-    z-index: 20;
-}
-
-.carousel-btn:hover {
-    transform: translateY(-50%) scale(1.08);
-}
-
-.carousel-btn.prev {
-    left: 12px;
-}
-
-.carousel-btn.next {
-    right: 12px;
-}
-
-/* Mobile */
-
-@media (max-width:768px){
-
-    .carousel .portfolio-item,
-    .carousel .model-card{
-        flex:0 0 100%;
-        max-width:100%;
-    }
-
-    .carousel-btn.prev{
-        left:-15px;
-    }
-
-    .carousel-btn.next{
-        right:-15px;
-    }
-}
 
 /* ============================================
-   PORTFOLIO/MODELS GRID - Dynamic layout
+   ARROWS
    ============================================ */
-.portfolio-grid, .model-showcase {
-    display: grid;
-    gap: 2rem;
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: rgba(37, 99, 235, 0.95);
+    color: white;
+
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    cursor: pointer;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
 }
 
-/* 1 item - centered */
-.portfolio-grid.count-1, .model-showcase.count-1 {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
+
+.carousel-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-50%) scale(1.1);
 }
 
-/* 2 items - full width */
-.portfolio-grid.count-2, .model-showcase.count-2 {
-    grid-template-columns: repeat(2, 1fr);
+
+.carousel-btn.prev {
+    left: 5px;
 }
 
-/* 3 items - full width */
-.portfolio-grid.count-3, .model-showcase.count-3 {
-    grid-template-columns: repeat(3, 1fr);
+
+.carousel-btn.next {
+    right: 5px;
 }
 
-/* 4+ items - handled by carousel */
-.portfolio-grid.count-4,
-.portfolio-grid.count-5,
-.portfolio-grid.count-6,
-.model-showcase.count-4,
-.model-showcase.count-5,
-.model-showcase.count-6 {
-    grid-template-columns: repeat(3, 1fr);
+
+/* Disabled arrows */
+.carousel-btn:disabled {
+    opacity: .35;
+    cursor: default;
 }
 
-/* Carousel items take full width of track */
-.carousel .portfolio-item,
-.carousel .model-card {
-    flex: 0 0 calc(100% / 3 - 1.33rem);
-    min-width: 300px;
-}
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .portfolio-grid.count-2,
-    .model-showcase.count-2 {
-        grid-template-columns: 1fr;
+/* ============================================
+   MOBILE
+   ============================================ */
+
+@media(max-width:768px){
+
+    .carousel {
+        padding: 0 40px;
     }
-    
-    .portfolio-grid.count-3,
-    .model-showcase.count-3 {
-        grid-template-columns: 1fr;
-    }
-    
+
     .carousel .portfolio-item,
     .carousel .model-card {
-        flex: 0 0 calc(100% - 2rem);
+        flex: 0 0 100%;
+        max-width: 100%;
     }
-    
+
     .carousel-btn {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         font-size: 1rem;
+    }
+
+    .carousel-btn.prev {
+        left: 0;
+    }
+
+    .carousel-btn.next {
+        right: 0;
     }
 }
