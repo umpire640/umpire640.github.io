@@ -10,10 +10,12 @@ function renderPortfolio() {
     const count = CFG.projects.length;
     container.classList.add(`count-${count}`);
 
-    if (count > 3) {
-        renderCarousel(container, CFG.projects, renderProject);
+    if (items.length <= 3) {
+        // Render normally (no carousel)
+        container.innerHTML = items.map(renderFn).join('');
     } else {
-        container.innerHTML = CFG.projects.map(renderProject).join('');
+        // 4+ items become a carousel
+        renderCarousel(container, items, renderFn);
     }
 }
 
@@ -41,10 +43,12 @@ function renderModels() {
     const count = CFG.models.length;
     container.classList.add(`count-${count}`);
 
-    if (count > 3) {
-        renderCarousel(container, CFG.models, renderModel);
+    if (items.length <= 3) {
+        // Render normally (no carousel)
+        container.innerHTML = items.map(renderFn).join('');
     } else {
-        container.innerHTML = CFG.models.map(renderModel).join('');
+        // 4+ items become a carousel
+        renderCarousel(container, items, renderFn);
     }
 }
 
@@ -72,45 +76,55 @@ function renderModel(m, i) {
     `;
 }
 
-// Simple carousel - full width slides
+// Carousel that shows 3 cards at a time and moves 1 card per click
 function renderCarousel(container, items, renderFn) {
+
+    const visibleSlides = 3;
+
     container.innerHTML = `
         <div class="carousel">
             <div class="carousel-track">
                 ${items.map(renderFn).join('')}
             </div>
+
             <button class="carousel-btn prev">←</button>
             <button class="carousel-btn next">→</button>
         </div>
     `;
 
     const track = container.querySelector('.carousel-track');
+    const slides = container.querySelectorAll('.portfolio-item, .model-card');
+
     const prevBtn = container.querySelector('.prev');
     const nextBtn = container.querySelector('.next');
+
     let currentIndex = 0;
 
-    // Set track width to N * 100%
-    track.style.width = `${items.length * 100}%`;
-
-    // Make each slide full width
-    container.querySelectorAll('.portfolio-item, .model-card').forEach(item => {
-        item.style.flex = '0 0 100%';
-        item.style.minWidth = '100%';
-    });
-
     function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        const slideWidth = 100 / visibleSlides;
+
+        track.style.transform =
+            `translateX(-${currentIndex * slideWidth}%)`;
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= slides.length - visibleSlides;
     }
 
     prevBtn.addEventListener('click', () => {
-        currentIndex = Math.max(0, currentIndex - 1);
-        updateCarousel();
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
     });
 
     nextBtn.addEventListener('click', () => {
-        currentIndex = Math.min(items.length - 1, currentIndex + 1);
-        updateCarousel();
+        if (currentIndex < slides.length - visibleSlides) {
+            currentIndex++;
+            updateCarousel();
+        }
     });
+
+    updateCarousel();
 }
 
 // Populate static config values
