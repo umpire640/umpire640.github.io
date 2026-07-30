@@ -346,9 +346,8 @@ model-viewer:not(:defined)::after {
    CAROUSEL STYLES - Full Width
    ============================================ */
 .carousel {
-    position: relative;
+    grid-column: 1 / -1;  /* Span all grid columns */
     width: 100%;
-    overflow: hidden;
     margin: 0 auto;
 }
 
