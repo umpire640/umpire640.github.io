@@ -1,10 +1,8 @@
-// ============================================
-// CONFIG.JS - Edit only this file!
-// ============================================
+
 const CFG = {
     // Personal info
-    name: "Your Name",
-    email: "your.email@example.com",
+    name: "My Name",
+    email: "my.email@example.com",
     phone: "+45 XX XX XX XX",
 
     // Social
@@ -18,35 +16,33 @@ const CFG = {
     projects: [
         {
             title: "Gear Assembly System",
-            description: "Precision gear assembly designed for high-torque applications. Features modular components and optimized tooth profiles.",
-            tags: ["CAD Design", "Mechanical", "Prototyping"],
+            description: "Precision gear assembly designed for high-torque applications.",
+            tags: ["CAD Design", "Mechanical"],
             image: "assets/images/project-1.jpg"
         },
         {
             title: "Industrial Robotic Arm",
-            description: "6-axis robotic arm with servo-controlled joints. Designed for pick-and-place operations with 0.1mm precision.",
-            tags: ["Robotics", "Automation", "Servo Control"],
+            description: "6-axis robotic arm with servo-controlled joints.",
+            tags: ["Robotics", "Automation"],
             image: "assets/images/project-2.jpg"
         }
-        // Add more projects here - they'll auto-layout
     ],
 
     // ===== 3D MODELS =====
     models: [
         {
             title: "Sample Model",
-            description: "Free sample from Google. Replace with your own .glb file.",
+            description: "Free sample from Google.",
             file: "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
             poster: "https://modelviewer.dev/shared-assets/models/Astronaut.webp",
             isSample: true
         },
         {
             title: "Your Model",
-            description: "Add your own 3D model.",
+            description: "Add your own .glb file.",
             file: "assets/models/telescope.glb",
             isSample: false
         }
-        // Add more models here
     ],
 
     // URLs
@@ -55,5 +51,4 @@ const CFG = {
     get emailUrl() { return `mailto:${this.email}`; }
 };
 
-// Expose globally
 window.CFG = CFG;
