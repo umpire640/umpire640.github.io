@@ -340,3 +340,117 @@ model-viewer:not(:defined) {
 model-viewer:not(:defined)::after {
     content: "Loading 3D viewer...";
 }
+
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 2rem;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(37, 99, 235, 0.8);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 1rem;
+}
+
+.carousel-btn.next {
+    right: 1rem;
+}
+
+/* ============================================
+   PORTFOLIO/MODELS GRID - Dynamic layout
+   ============================================ */
+.portfolio-grid, .model-showcase {
+    display: grid;
+    gap: 2rem;
+}
+
+/* 1 item - centered */
+.portfolio-grid.count-1, .model-showcase.count-1 {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* 2 items - full width */
+.portfolio-grid.count-2, .model-showcase.count-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* 3 items - full width */
+.portfolio-grid.count-3, .model-showcase.count-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* 4+ items - handled by carousel */
+.portfolio-grid.count-4,
+.portfolio-grid.count-5,
+.portfolio-grid.count-6,
+.model-showcase.count-4,
+.model-showcase.count-5,
+.model-showcase.count-6 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Carousel items take full width of track */
+.carousel .portfolio-item,
+.carousel .model-card {
+    flex: 0 0 calc(100% / 3 - 1.33rem);
+    min-width: 300px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .portfolio-grid.count-2,
+    .model-showcase.count-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-grid.count-3,
+    .model-showcase.count-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .carousel .portfolio-item,
+    .carousel .model-card {
+        flex: 0 0 calc(100% - 2rem);
+    }
+    
+    .carousel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+}
