@@ -7,15 +7,15 @@ function renderPortfolio() {
     const container = document.querySelector('.portfolio-grid');
     if (!container) return;
 
-    const count = CFG.projects.length;
-    container.classList.add(`count-${count}`);
+    const items = CFG.projects;
+    const count = items.length;
 
-    if (items.length <= 3) {
-        // Render normally (no carousel)
-        container.innerHTML = items.map(renderFn).join('');
+    container.className = `portfolio-grid count-${count}`;
+
+    if (count <= 3) {
+        container.innerHTML = items.map(renderProject).join('');
     } else {
-        // 4+ items become a carousel
-        renderCarousel(container, items, renderFn);
+        renderCarousel(container, items, renderProject);
     }
 }
 
@@ -40,15 +40,15 @@ function renderModels() {
     const container = document.querySelector('.model-showcase');
     if (!container) return;
 
-    const count = CFG.models.length;
-    container.classList.add(`count-${count}`);
+    const items = CFG.models;
+    const count = items.length;
 
-    if (items.length <= 3) {
-        // Render normally (no carousel)
-        container.innerHTML = items.map(renderFn).join('');
+    container.className = `model-showcase count-${count}`;
+
+    if (count <= 3) {
+        container.innerHTML = items.map(renderModel).join('');
     } else {
-        // 4+ items become a carousel
-        renderCarousel(container, items, renderFn);
+        renderCarousel(container, items, renderModel);
     }
 }
 
@@ -76,7 +76,10 @@ function renderModel(m, i) {
     `;
 }
 
-// Carousel that shows 3 cards at a time and moves 1 card per click
+// ============================================
+// CAROUSEL
+// ============================================
+
 function renderCarousel(container, items, renderFn) {
 
     const visibleSlides = 3;
@@ -92,9 +95,9 @@ function renderCarousel(container, items, renderFn) {
         </div>
     `;
 
-    const track = container.querySelector(".carousel-track");
-    const prevBtn = container.querySelector(".prev");
-    const nextBtn = container.querySelector(".next");
+    const track = container.querySelector('.carousel-track');
+    const prevBtn = container.querySelector('.prev');
+    const nextBtn = container.querySelector('.next');
 
     let currentIndex = 0;
     const maxIndex = items.length - visibleSlides;
@@ -107,24 +110,27 @@ function renderCarousel(container, items, renderFn) {
         nextBtn.disabled = currentIndex >= maxIndex;
     }
 
-    prevBtn.onclick = () => {
+    prevBtn.addEventListener('click', () => {
         if (currentIndex > 0) {
             currentIndex--;
             updateCarousel();
         }
-    };
+    });
 
-    nextBtn.onclick = () => {
+    nextBtn.addEventListener('click', () => {
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateCarousel();
         }
-    };
+    });
 
     updateCarousel();
 }
 
-// Populate static config values
+// ============================================
+// POPULATE CONFIG
+// ============================================
+
 function populateConfig() {
     const cfg = window.CFG;
 
@@ -159,13 +165,18 @@ function populateConfig() {
 // ============================================
 // INITIALIZATION
 // ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
+
     // Populate static values
     populateConfig();
 
     // Update meta description and title
-    document.querySelector('meta[name="description"]').content = `Mechanical Engineering Portfolio - ${CFG.name}`;
-    document.title = `${CFG.name} | Mechanical Engineer | 3D Portfolio`;
+    document.querySelector('meta[name="description"]').content =
+        `Mechanical Engineering Portfolio - ${CFG.name}`;
+
+    document.title =
+        `${CFG.name} | Mechanical Engineer | 3D Portfolio`;
 
     // Render dynamic content
     renderPortfolio();
@@ -174,47 +185,86 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu
     window.toggleMobileMenu = () => {
         const nav = document.querySelector('nav ul');
-        if (nav) nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        if (nav) {
+            nav.style.display =
+                nav.style.display === 'flex' ? 'none' : 'flex';
+        }
     };
 
     // Scroll reveal
-    const revealElements = document.querySelectorAll('.reveal, .reveal.delay-1, .reveal.delay-2, .reveal.delay-3');
+    const revealElements = document.querySelectorAll(
+        '.reveal, .reveal.delay-1, .reveal.delay-2, .reveal.delay-3'
+    );
+
     const revealOnScroll = () => {
         revealElements.forEach(element => {
-            if (element.getBoundingClientRect().top < window.innerHeight - 100) {
+            if (
+                element.getBoundingClientRect().top <
+                window.innerHeight - 100
+            ) {
                 element.classList.add('revealed');
             }
         });
     };
+
     window.addEventListener('load', revealOnScroll);
     window.addEventListener('scroll', revealOnScroll);
+
     revealOnScroll();
 
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
         anchor.addEventListener('click', function(e) {
+
             if (this.getAttribute('href') === '#') return;
+
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+
+            const target =
+                document.querySelector(this.getAttribute('href'));
+
             if (target) {
-                const offset = target.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top: offset, behavior: 'smooth' });
+
+                const offset =
+                    target.getBoundingClientRect().top +
+                    window.pageYOffset - 80;
+
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
             }
+
             const nav = document.querySelector('nav ul');
-            if (nav && nav.style.display === 'flex') nav.style.display = 'none';
+
+            if (nav && nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            }
         });
     });
 
     // Active navigation
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
     window.addEventListener('scroll', () => {
+
         let current = '';
+
         sections.forEach(section => {
-            if (window.pageYOffset >= section.offsetTop - 100) current = section.getAttribute('id');
+
+            if (window.pageYOffset >= section.offsetTop - 100) {
+                current = section.getAttribute('id');
+            }
         });
+
         navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+
+            link.classList.toggle(
+                'active',
+                link.getAttribute('href') === `#${current}`
+            );
         });
     });
 });
