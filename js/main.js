@@ -14,11 +14,11 @@ function renderPortfolio() {
     container.className = `portfolio-grid count-${count}`;
 
     const isMobile = window.innerWidth <= 768;
-    
+
     if (count <= 3 || isMobile) {
-        container.innerHTML = items.map(renderFn).join('');
+        container.innerHTML = items.map(renderProject).join('');
     } else {
-        renderCarousel(container, items, renderFn);
+        renderCarousel(container, items, renderProject);
     }
 }
 
@@ -58,11 +58,11 @@ function renderModels() {
     container.className = `model-showcase count-${count}`;
 
     const isMobile = window.innerWidth <= 768;
-    
+
     if (count <= 3 || isMobile) {
-        container.innerHTML = items.map(renderFn).join('');
+        container.innerHTML = items.map(renderModel).join('');
     } else {
-        renderCarousel(container, items, renderFn);
+        renderCarousel(container, items, renderModel);
     }
 }
 
