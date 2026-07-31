@@ -13,13 +13,12 @@ function renderPortfolio() {
 
     container.className = `portfolio-grid count-${count}`;
 
-    // 1-3 projects: normal grid
-    if (count <= 3) {
-        container.innerHTML = items.map(renderProject).join('');
-    } 
-    // 4+ projects: carousel
-    else {
-        renderCarousel(container, items, renderProject);
+    const isMobile = window.innerWidth <= 768;
+    
+    if (count <= 3 || isMobile) {
+        container.innerHTML = items.map(renderFn).join('');
+    } else {
+        renderCarousel(container, items, renderFn);
     }
 }
 
@@ -58,13 +57,12 @@ function renderModels() {
 
     container.className = `model-showcase count-${count}`;
 
-    // 1-3 models: normal grid
-    if (count <= 3) {
-        container.innerHTML = items.map(renderModel).join('');
-    } 
-    // 4+ models: carousel
-    else {
-        renderCarousel(container, items, renderModel);
+    const isMobile = window.innerWidth <= 768;
+    
+    if (count <= 3 || isMobile) {
+        container.innerHTML = items.map(renderFn).join('');
+    } else {
+        renderCarousel(container, items, renderFn);
     }
 }
 
