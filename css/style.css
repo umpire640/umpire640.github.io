@@ -490,12 +490,17 @@ model-viewer:not(:defined)::after {
 /* ============================================
    MOBILE
    ============================================ */
-
-@media (max-width:768px){
+@media (max-width: 768px) {
 
     .portfolio-grid,
-    .model-showcase{
-        grid-template-columns:1fr;
+    .model-showcase {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    .carousel {
+        display: none;
     }
 
 }
